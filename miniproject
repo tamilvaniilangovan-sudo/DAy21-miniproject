@@ -1,0 +1,49 @@
+package assignmnt12;
+
+import java.io.File;
+import java.io.IOException;
+
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class AssignMiniproj {
+	static WebDriver driver;
+	public static void takeScreenshot(String fileName)throws IOException{
+		String path="C:\\Users\\TAMIL\\eclipse-workspace\\my-project\\ScreenShot";
+		TakesScreenshot ts=(TakesScreenshot) driver;
+		File temp=ts.getScreenshotAs(OutputType.FILE);
+		File dest=new File(path+fileName+".png");
+		FileUtils.copyFile(temp, dest);
+	}
+
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		WebElement parrot, productlink, addtocart, checkout;
+		String URL = "https://petstore.octoperf.com/actions/Catalog.action";
+		String Parrot = "//a[contains(@href, 'BIRDS')]";
+		String ProductLink = "(//a[text()=\"AV-CB-01\"])";
+		String AddtoCart = "//a[(contains(@href,'EST-18')) and @class='Button']";
+		String CheckoutButton = "(//a[text() = 'Proceed to Checkout'])";
+		driver = new ChromeDriver();
+		driver.get(URL);
+		parrot = driver.findElement(By.xpath(Parrot));
+		takeScreenshot("Parrot");
+		parrot.click();
+		productlink = driver.findElement(By.xpath(ProductLink));
+		takeScreenshot("Productlink");
+		productlink.click();
+		addtocart = driver.findElement(By.xpath(AddtoCart));
+		takeScreenshot("AddtoCart");
+		addtocart.click();
+		checkout = driver.findElement(By.xpath(CheckoutButton));
+		takeScreenshot("CheckoutButton");
+		checkout.click();
+		driver.close(); }
+	}
+
+
